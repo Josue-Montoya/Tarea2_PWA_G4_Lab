@@ -6,42 +6,64 @@
 
 <h1 class="text-center">Eliminar Habitación</h1>
 
-<h3>¿Está seguro que desea eliminar?</h3>
+<h3 class="text-center">¿Está seguro que desea eliminar?</h3>
 
-<div>
-    <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.ID)
+<div class="text-center">
+    <dl>
+        <dt>
+            <div class="text-center">
+                @Html.DisplayNameFor(model => model.ID)
+            </div>
         </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.ID)
+        <dd>
+            <div class="text-center">
+                @Html.DisplayFor(model => model.ID)
+            </div>
         </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.roomNumber)
+        <dt>
+            <div class="text-center">
+                @Html.DisplayNameFor(model => model.roomNumber)
+            </div>
         </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.roomNumber)
+        <dd>
+            <div class="text-center">
+                @Html.DisplayFor(model => model.roomNumber)
+            </div>
         </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.roomType)
+        <dt>
+            <div class="text-center">
+                @Html.DisplayNameFor(model => model.roomType)
+            </div>
         </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.roomType)
+        <dd>
+            <div class="text-center">
+                @Html.DisplayFor(model => model.roomType)
+            </div>
         </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.roomPrice)
+        <dt>
+            <div class="text-center">
+                @Html.DisplayNameFor(model => model.roomPrice)
+            </div>
         </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.roomPrice)
+        <dd>
+            <div class="text-center">
+                @Html.DisplayFor(model => model.roomPrice)
+            </div>
         </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.HotelId)
+        <dt>
+            <div class="text-center">
+                @Html.DisplayNameFor(model => model.HotelId)
+            </div>
         </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.HotelId)
+        <dd>
+            <div class="text-center">
+                @Html.DisplayFor(model => model.HotelId)
+            </div>
         </dd>
     </dl>
+</div>
 
+<div class="text-center">
     <form asp-action="DeleteRoom">
         <input asp-for="ID" type="hidden" class="form-control" />
         <input type="submit" value="Eliminar" class="btn btn-danger" />

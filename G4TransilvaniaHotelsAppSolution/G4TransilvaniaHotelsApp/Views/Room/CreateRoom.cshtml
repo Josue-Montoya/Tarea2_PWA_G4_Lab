@@ -1,5 +1,4 @@
-﻿
-@model RoomModel
+﻿@model RoomModel
 
 @{
     ViewData["Title"] = "Nueva Habitacion";
@@ -22,7 +21,14 @@
 
                 <div class="form-group mb-3">
                     <label asp-for="roomType" class="control-label">Tipo de Habitacion</label>
-                    <input asp-for="roomType" class="form-control" />
+                    <select asp-for="roomType" class="form-select">
+                        <option value="">Seleccione un tipo de habitación</option>
+                        <option value="Individual">Individual</option>
+                        <option value="Doble">Doble</option>
+                        <option value="Suite">Suite</option>
+                        <option value="Premium">Premium</option>
+                        <!-- Agrega más opciones según los tipos disponibles -->
+                    </select>
                     <span asp-validation-for="roomType" class="text-danger"></span>
                 </div>
 
@@ -42,11 +48,11 @@
 
                 <div class="form-group">
                     <input type="submit" value="Guardar" class="btn btn-primary" />
-
-                    <a asp-action="ViewRoom">Regresar al listado</a>
+                    <a asp-action="ViewRoom" class="btn btn-secondary">Regresar al listado</a>
                 </div>
             </form>
         </div>
     </div>
 </div>
+
 
