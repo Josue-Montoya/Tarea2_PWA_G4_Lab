@@ -1,0 +1,52 @@
+﻿
+@model RoomModel
+
+@{
+    ViewData["Title"] = "Nueva Habitacion";
+}
+
+<h1 class="text-center">Nueva Habitacion</h1>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <form asp-action="CreateRoom">
+                @Html.AntiForgeryToken()
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                <div class="form-group mb-3">
+                    <label asp-for="roomNumber" class="control-label">Numero de Habitacion</label>
+                    <input asp-for="roomNumber" class="form-control" />
+                    <span asp-validation-for="roomNumber" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label asp-for="roomType" class="control-label">Tipo de Habitacion</label>
+                    <input asp-for="roomType" class="form-control" />
+                    <span asp-validation-for="roomType" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label asp-for="roomPrice" class="control-label">Precio de Habitacion</label>
+                    <input asp-for="roomPrice" class="form-control" />
+                    <span asp-validation-for="roomPrice" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label asp-for="HotelId" class="control-label">Hotel</label>
+                    <select asp-for="HotelId" class="form-select" asp-items="@ViewBag.Hotels">
+                        <option value="">Seleccione un hotel</option>
+                    </select>
+                    <span asp-validation-for="HotelId" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <input type="submit" value="Guardar" class="btn btn-primary" />
+
+                    <a asp-action="ViewRoom">Regresar al listado</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
