@@ -1,0 +1,51 @@
+﻿@model HotelsModel
+@{
+	ViewData["Title"] = "Nuevo Hotel";
+}
+
+<h1 class="text-center">Nuevo Hotel</h1>
+
+<div class="container">
+	<div class="row">
+		<div class="col-md-12">
+
+			<div asp-validation-summary="ModelOnly"></div>
+
+			<form asp-action="Create" onsubmit="return confirmAction()">
+				@Html.AntiForgeryToken()
+				<div class="mb-3">
+					<label asp-for="hotelName" class="form-label">Nombre del hotel</label>
+					<input asp-for="hotelName" type="text" class="form-control" />
+					<span asp-validation-for="hotelName" class="text-danger"></span>
+				</div>
+				<div class="mb-3">
+					<label asp-for="hotelStars" class="form-label">Estrellas del Hotel</label>
+					<input asp-for="hotelStars" type="text" class="form-control" />
+					<span asp-validation-for="hotelStars" class="text-danger"></span>
+				</div>
+				<div class="mb-3">
+					<label asp-for="hotelAddress" class="form-label">Direccion del Hotel</label>
+					<input asp-for="hotelAddress" type="text" class="form-control" />
+					<span asp-validation-for="hotelAddress" class="text-danger"></span>
+				</div>
+				<div class="mb-3">
+					<label asp-for="hotelPhone" class="form-label">Numero del Hotel</label>
+					<input asp-for="hotelPhone" type="text" class="form-control" />
+					<span asp-validation-for="hotelPhone" class="text-danger"></span>
+				</div>
+				<button type="submit" class="btn btn-primary">Agregar Hotel</button>
+			</form>
+		</div>
+	</div>
+</div>
+
+<script>
+	function confirmAction() {
+		if (confirm('¿Estás seguro de agregar este Hotel?')) {
+			return true;
+		} else {
+			window.location.href = '@Url.Action("Index", "Hotels")';
+			return false;
+		}
+	}
+</script>
