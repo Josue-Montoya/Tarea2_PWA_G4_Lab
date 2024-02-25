@@ -1,0 +1,60 @@
+﻿@model IEnumerable<RoomModel>
+
+@{
+    ViewData["Title"] = "Listado de Habitaciones";
+}
+
+<h1 class="text-center">Listado de Habitaciones</h1>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+
+            <div class="mt-3 mb-3">
+                <a asp-action="CreateRoom" asp-controller="Room" class="btn btn-success">
+                    Nueva Habitación
+                </a>
+            </div>
+
+            <table class="table table-bordered table-striped table-responsive" id="roomsTable">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Número de Habitación</th>
+                        <th>Tipo de Habitación</th>
+                        <th>Precio</th>
+                        <th>Hotel</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var room in Model)
+                    {
+                        <tr>
+                            <td>@Html.DisplayFor(item => room.ID)</td>
+                            <td>@Html.DisplayFor(item => room.roomNumber)</td>
+                            <td>@Html.DisplayFor(item => room.roomType)</td>
+                            <td>@Html.DisplayFor(item => room.roomPrice)</td>
+                            <td>@Html.DisplayFor(item => room.HotelId)</td>
+                            <td>
+                                <a asp-controller="Room"
+                                   asp-action="EditRoom"
+                                   asp-route-id="@room.ID"
+                                   class="btn btn-primary">
+                                    Editar
+                                </a>
+                                <a asp-controller="Room"
+                                   asp-action="DeleteRoom"
+                                   asp-route-id="@room.ID"
+                                   class="btn btn-danger">
+                                    Eliminar
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+

@@ -1,5 +1,6 @@
 using G4TransilvaniaHotelsApp.Data;
 using G4TransilvaniaHotelsApp.Repositories;
+using G4TransilvaniaHotelsApp.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -7,6 +8,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 builder.Services.AddSingleton<SqlDataAccess>();
 builder.Services.AddScoped<IHotelsRepository, HotelsRepository>();
+builder.Services.AddScoped<IRoomRepository, RoomRepository>();
 
 var app = builder.Build();
 

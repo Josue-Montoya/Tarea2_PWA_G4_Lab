@@ -1,0 +1,43 @@
+﻿@model RoomModel
+
+@{
+    ViewData["Title"] = "Editar Habitación";
+}
+
+<h1 class="text-center">Editar Habitación</h1>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <form asp-action="EditRoom">
+                @Html.AntiForgeryToken()
+                <div class="mb-3">
+                    <label asp-for="ID" class="form-label">ID</label>
+                    <input asp-for="ID" type="text" class="form-control" readonly>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="roomNumber" class="form-label">Número de Habitación</label>
+                    <input asp-for="roomNumber" type="text" class="form-control">
+                </div>
+                <div class="mb-3">
+                    <label asp-for="roomType" class="form-label">Tipo de Habitación</label>
+                    <input asp-for="roomType" type="text" class="form-control">
+                </div>
+                <div class="mb-3">
+                    <label asp-for="roomPrice" class="form-label">Precio</label>
+                    <input asp-for="roomPrice" type="text" class="form-control">
+                </div>
+                <div class="mb-3">
+                    <label asp-for="HotelId" class="form-label">Hotel</label>
+                    <select asp-for="HotelId" class="form-select" asp-items="@ViewBag.Hotels">
+                        <option value="">Seleccione un hotel</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary">Editar</button>
+                    <a asp-action="ViewRoom">Regresar al listado</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
