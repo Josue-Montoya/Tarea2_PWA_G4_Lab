@@ -65,7 +65,7 @@ namespace G4TransilvaniaHotelsApp.Repositories
                 {
                     command.Connection = connection;
                     command.CommandText = @"Select roomId, roomNumber, roomType, roomPrice, hotelId 
-                                            From Room";
+                                            From Room Where roomId = @roomId";
 
                     command.Parameters.AddWithValue("@roomId", id);
                     command.CommandType = CommandType.Text;
@@ -142,7 +142,7 @@ namespace G4TransilvaniaHotelsApp.Repositories
             }
         }
 
-        public void DeleteRoom(int roomId)
+        public void DeleteRoom(int id)
         {
             using (var connection = _dbConnection.GetConnection())
             {
@@ -153,7 +153,7 @@ namespace G4TransilvaniaHotelsApp.Repositories
                     command.Connection = connection;
                     command.CommandText = @"DELETE FROM Room
 											WHERE roomId = @roomId";
-                    command.Parameters.AddWithValue("@roomId", roomId);
+                    command.Parameters.AddWithValue("@roomId", id);
                     command.CommandType = CommandType.Text;
                     command.ExecuteNonQuery();
                 }

@@ -86,9 +86,9 @@ namespace G4TransilvaniaHotelsApp.Controllers
 
 
         [HttpGet]
-        public ActionResult DeleteRoom(int roomId)
+        public ActionResult DeleteRoom(int id)
         {
-            var room = _roomRepository.GetRoomById(roomId);
+            var room = _roomRepository.GetRoomById(id);
 
             if (room == null)
             {

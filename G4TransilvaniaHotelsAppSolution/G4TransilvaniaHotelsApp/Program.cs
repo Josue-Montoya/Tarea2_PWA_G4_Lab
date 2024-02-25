@@ -1,6 +1,5 @@
 using G4TransilvaniaHotelsApp.Data;
 using G4TransilvaniaHotelsApp.Repositories;
-using G4TransilvaniaHotelsApp.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
