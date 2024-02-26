@@ -1,16 +1,22 @@
-﻿using G4TransilvaniaHotelsApp.Models;
+﻿using FluentValidation;
+using FluentValidation.Results;
+using G4TransilvaniaHotelsApp.Models;
 using G4TransilvaniaHotelsApp.Repositories;
+using G4TransilvaniaHotelsApp.Validations;
 using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.DataAnnotations;
+using ValidationResult = FluentValidation.Results.ValidationResult;
 
 namespace G4TransilvaniaHotelsApp.Controllers
 {
     public class HotelsController : Controller
     {
+        private IValidator<HotelsModel> _hotelsValidator;
         private readonly IHotelsRepository _hotelsRepository;
 
-        public HotelsController(IHotelsRepository hotelsRepository)
+        public HotelsController(IHotelsRepository hotelsRepository, IValidator<HotelsModel> hotelsValidator)
         {
+            _hotelsValidator = hotelsValidator;
             _hotelsRepository = hotelsRepository;
         }
 
@@ -29,6 +35,8 @@ namespace G4TransilvaniaHotelsApp.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(HotelsModel hotel)
         {
+			ValidationResult validationResult = _hotelsValidator.Validate(hotel);  
+
             try
             {
                 _hotelsRepository.AddHotels(hotel);
@@ -37,6 +45,9 @@ namespace G4TransilvaniaHotelsApp.Controllers
 			catch (Exception ex)
             {
                 ViewBag.Error = ex.Message;
+
+                validationResult.AddToModelState(this.ModelState);
+
                 return View(hotel);
             }
         }

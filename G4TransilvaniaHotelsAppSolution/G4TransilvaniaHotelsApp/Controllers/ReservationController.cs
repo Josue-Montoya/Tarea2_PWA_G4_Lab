@@ -1,6 +1,9 @@
-﻿using G4TransilvaniaHotelsApp.Models;
+﻿using FluentValidation;
+using FluentValidation.Results;
+using G4TransilvaniaHotelsApp.Models;
 using G4TransilvaniaHotelsApp.Repositories;
 using G4TransilvaniaHotelsApp.RepositoriesClient;
+using G4TransilvaniaHotelsApp.Validations;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
@@ -8,13 +11,16 @@ namespace G4TransilvaniaHotelsApp.Controllers
 {
     public class ReservationController : Controller
     {
+        private IValidator<ReservationModel> _reservationValidator;
+
         private readonly IRoomRepository _roomRepository;
         private readonly IHotelsRepository _hotelsRepository;
         private readonly IClientRepository _clientRepository;
         private readonly IReservationRepository _reservationRepository;
 
-        public ReservationController(IReservationRepository reservationRepository, IHotelsRepository hotelsRepository, IClientRepository clientRepository, IRoomRepository roomRepository)
+        public ReservationController(IReservationRepository reservationRepository, IHotelsRepository hotelsRepository, IClientRepository clientRepository, IRoomRepository roomRepository, IValidator<ReservationModel> reservationValidator)
         {
+            _reservationValidator = reservationValidator;
             _reservationRepository = reservationRepository;
             _hotelsRepository = hotelsRepository;
             _clientRepository = clientRepository;
@@ -43,6 +49,9 @@ namespace G4TransilvaniaHotelsApp.Controllers
 
         public IActionResult CreateReservation(ReservationModel reservation)
         {
+
+            ValidationResult validationResult = _reservationValidator.Validate(reservation);
+
             try
             {
                 _reservationRepository.AddReservation(reservation);
@@ -52,6 +61,8 @@ namespace G4TransilvaniaHotelsApp.Controllers
             catch (Exception ex)
             {
                 ViewBag.Exception = ex;
+
+                validationResult.AddToModelState(this.ModelState);
 
                 return View(reservation);
             }
