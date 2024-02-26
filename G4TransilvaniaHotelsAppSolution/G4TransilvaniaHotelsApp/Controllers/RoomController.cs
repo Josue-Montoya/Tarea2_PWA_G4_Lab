@@ -68,7 +68,7 @@ namespace G4TransilvaniaHotelsApp.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult EditRoom(int id, RoomModel room)
+        public IActionResult EditRoom(RoomModel room)
         {
             try
             {

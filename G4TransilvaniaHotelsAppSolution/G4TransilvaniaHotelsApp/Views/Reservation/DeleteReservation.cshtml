@@ -1,0 +1,92 @@
+﻿@model ReservationModel
+
+@{
+    ViewData["Title"] = "Eliminar Reservacion";
+}
+
+<h1 class="text-center">Eliminar Habitación</h1>
+
+<h3 class="text-center">¿Está seguro que desea eliminar?</h3>
+
+<div class="text-center">
+    <dl>
+        <dt>
+            <div class="text-center">
+                @Html.DisplayNameFor(model => model.reservationId)
+            </div>
+        </dt>
+        <dd>
+            <div class="text-center">
+                @Html.DisplayFor(model => model.reservationId)
+            </div>
+        </dd>
+        <dt>
+            <div class="text-center">
+                @Html.DisplayNameFor(model => model.startDate)
+            </div>
+        </dt>
+        <dd>
+            <div class="text-center">
+                @Html.DisplayFor(model => model.startDate)
+            </div>
+        </dd>
+        <dt>
+            <div class="text-center">
+                @Html.DisplayNameFor(model => model.endDate)
+            </div>
+        </dt>
+        <dd>
+            <div class="text-center">
+                @Html.DisplayFor(model => model.endDate)
+            </div>
+        </dd>
+        <dt>
+            <div class="text-center">
+                @Html.DisplayNameFor(model => model.roomId)
+            </div>
+        </dt>
+        <dd>
+            <div class="text-center">
+                @Html.DisplayFor(model => model.roomId)
+            </div>
+        </dd>
+        <dt>
+            <div class="text-center">
+                @Html.DisplayNameFor(model => model.clientId)
+            </div>
+        </dt>
+        <dd>
+            <div class="text-center">
+                @Html.DisplayFor(model => model.clientId)
+            </div>
+        </dd>
+        <dt>
+            <div class="text-center">
+                @Html.DisplayNameFor(model => model.reservationPrice)
+            </div>
+        </dt>
+        <dd>
+            <div class="text-center">
+                @Html.DisplayFor(model => model.reservationPrice)
+            </div>
+        </dd>
+        <dt>
+            <div class="text-center">
+                @Html.DisplayNameFor(model => model.paidReservation)
+            </div>
+        </dt>
+        <dd>
+            <div class="text-center">
+                @Html.DisplayFor(model => model.paidReservation)
+            </div>
+        </dd>
+    </dl>
+</div>
+
+<div class="text-center">
+    <form asp-action="DeleteReservation">
+        <input asp-for="reservationId" type="hidden" class="form-control" />
+        <input type="submit" value="Eliminar" class="btn btn-danger" />
+        <a asp-action="ViewReservation" class="btn btn-primary">Regresar al listado</a>
+    </form>
+</div>

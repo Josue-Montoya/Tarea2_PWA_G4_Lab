@@ -1,0 +1,84 @@
+﻿@model ReservationModel
+@{
+    ViewData["Title"] = "Editar Reservacion";
+}
+
+<h1 class="text-center">Editar Reservacion</h1>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <form asp-action="EditReservation" onsubmit="return confirmAction()">
+                @Html.AntiForgeryToken()
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                <div class="form-group mb-3">
+                    <input asp-for="reservationId" type="hidden" class="form-control" />
+                    <label asp-for="startDate" class="control-label">Fecha de Inicio</label>
+                    <input asp-for="startDate" class="form-control" />
+                    <span asp-validation-for="startDate" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label asp-for="endDate" class="control-label">Fecha de Fin</label>
+                    <input asp-for="endDate" class="form-control" />
+                    <span asp-validation-for="endDate" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label asp-for="roomId" class="control-label">Habitacion</label>
+                    <select asp-for="roomId" class="form-select" asp-items="@ViewBag.Room">
+                        <option value="">Seleccione una habitación</option>
+                    </select>
+                    <span asp-validation-for="roomId" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label asp-for="clientId" class="control-label">Cliente</label>
+                    <select asp-for="clientId" class="form-select" asp-items="@ViewBag.Client">
+                        <option value="">Seleccione un cliente</option>
+                    </select>
+                    <span asp-validation-for="clientId" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label asp-for="reservationPrice" class="control-label">Precio de Reservacion</label>
+                    <input asp-for="reservationPrice" class="form-control" />
+                    <span asp-validation-for="reservationPrice" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label asp-for="paidReservation" class="control-label">¿Pagado?</label>
+                    <select asp-for="paidReservation" class="form-select">
+                        <option value="true">Sí</option>
+                        <option value="false">No</option>
+                    </select>
+                    <span asp-validation-for="paidReservation" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <input type="submit" value="Guardar" class="btn btn-primary" />
+                    <a asp-action="ViewReservation" class="btn btn-secondary">Regresar al listado</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"></script>
+
+    <script>
+        function confirmAction() {
+            if (confirm('¿Estás seguro de Editar esta Reservacion?')) {
+                return true;
+            } else {
+                window.location.href = '@Url.Action("ViewReservation", "Reservation")';
+                return false;
+            }
+        }
+    </script>
+}
