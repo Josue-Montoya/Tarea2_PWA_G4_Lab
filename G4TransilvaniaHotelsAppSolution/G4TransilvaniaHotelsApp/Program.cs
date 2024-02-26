@@ -1,5 +1,6 @@
 using G4TransilvaniaHotelsApp.Data;
 using G4TransilvaniaHotelsApp.Repositories;
+using G4TransilvaniaHotelsApp.RepositoriesClient;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,7 +9,8 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddSingleton<SqlDataAccess>();
 builder.Services.AddScoped<IHotelsRepository, HotelsRepository>();
 builder.Services.AddScoped<IRoomRepository, RoomRepository>();
-
+builder.Services.AddScoped<IClientRepository, ClientRepository>();
+builder.Services.AddScoped<IReservationRepository, ReservationRepository>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

@@ -1,0 +1,102 @@
+﻿@model IEnumerable<ReservationModel>
+
+@{
+    ViewData["Title"] = "Listado de Reservaciones";
+}
+
+<h1 class="text-center">Listado de Reservaciones</h1>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+
+            <div class="mb-3 mb-3">
+                <a asp-action="CreateReservation" asp-controller="Reservation" class="btn btn-success">
+                    Nueva Reservación
+                </a>
+            </div>
+
+            <table class="table table-bordered table-striped table-responsive" id="reservationsTable">
+                <thead>
+                    <tr>
+                        <td>Id Reservación</td>
+                        <td>Fecha de Inicio</td>
+                        <td>Fecha de Fin</td>
+                        <td>Id Habitación</td>
+                        <td>Id Cliente</td>
+                        <td>Precio de Reserva</td>
+                        <td>¿Pagado?</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var reservation in Model)
+                    {
+                        <tr>
+                            <td>@reservation.reservationId</td>
+                            <td>@reservation.startDate</td>
+                            <td>@reservation.endDate</td>
+                            <td>@reservation.roomId</td>
+                            <td>@reservation.clientId</td>
+                            <td>@reservation.reservationPrice</td>
+                            <td>@reservation.paidReservation</td>
+                            <td>
+                                <a asp-controller="Reservation"
+                                   asp-action="EditReservation"
+                                   asp-route-id="@reservation.reservationId"
+                                   class="btn btn-primary">
+                                    Editar
+                                </a>
+                                <a asp-controller="Reservation"
+                                   asp-action="DeleteReservation"
+                                   asp-route-id="@reservation.reservationId"
+                                   class="btn btn-danger">
+                                    Eliminar
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $("#reservationsTable").DataTable({
+                dom: 'Bfrtip',
+                buttons: [
+                    {
+                        extend: 'csv',
+                        exportOptions: {
+                            columns: ':not(:last-child)'
+                        }
+                    },
+                    {
+                        extend: 'pdf',
+                        exportOptions: {
+                            columns: ':not(:last-child)'
+                        }
+                    },
+                    {
+                        extend: 'excel',
+                        exportOptions: {
+                            columns: ':not(:last-child)'
+                        }
+                    }
+                ],
+                columnDefs: [
+                    {
+                        targets: 7,
+                        orderable: false,
+                        searchable: false
+                    }
+                ],
+                language: {
+                    url: '//cdn.datatables.net/plug-ins/1.13.7/i18n/es-ES.json'
+                }
+            });
+        });
+    </script>
+}
