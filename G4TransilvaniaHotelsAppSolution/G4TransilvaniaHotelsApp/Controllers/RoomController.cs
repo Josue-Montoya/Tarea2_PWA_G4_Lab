@@ -2,16 +2,22 @@
 using G4TransilvaniaHotelsApp.Models;
 using G4TransilvaniaHotelsApp.Repositories;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using FluentValidation;
+using FluentValidation.Results;
+using G4TransilvaniaHotelsApp.Validations;
 
 namespace G4TransilvaniaHotelsApp.Controllers
 {
     public class RoomController : Controller
     {
+        private IValidator<RoomModel> _roomValidator;
+
         private readonly IRoomRepository _roomRepository;
         private readonly IHotelsRepository _hotelsRepository;
 
-        public RoomController(IRoomRepository roomRepository, IHotelsRepository hotelsRepository)
+        public RoomController(IRoomRepository roomRepository, IHotelsRepository hotelsRepository, IValidator<RoomModel> roomValidator)
         {
+            _roomValidator = roomValidator;
             _roomRepository = roomRepository;
             _hotelsRepository = hotelsRepository;
         }
@@ -36,6 +42,8 @@ namespace G4TransilvaniaHotelsApp.Controllers
 
         public IActionResult CreateRoom(RoomModel room)
         {
+            ValidationResult validationResult = _roomValidator.Validate(room);
+
             try
             {
                 _roomRepository.AddRoom(room);
@@ -45,6 +53,8 @@ namespace G4TransilvaniaHotelsApp.Controllers
             catch (Exception ex)
             {
                 ViewBag.Exception = ex;
+
+                validationResult.AddToModelState(this.ModelState);
 
                 return View(room);
             }

@@ -9,6 +9,9 @@
 <div class="container">
     <div class="row">
         <div class="col-md-12">
+
+            <div asp-validation-summary="ModelOnly"></div>
+
             <form asp-action="CreateRoom" onsubmit="return confirmAction()">
                 @Html.AntiForgeryToken()
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>

@@ -2,15 +2,20 @@
 using G4TransilvaniaHotelsApp.Data;
 using G4TransilvaniaHotelsApp.Models;
 using G4TransilvaniaHotelsApp.RepositoriesClient;
+using FluentValidation;
+using FluentValidation.Results;
+using G4TransilvaniaHotelsApp.Validations;
 
 namespace G4TransilvaniaHotelsApp.Controllers
 {
     public class ClientController : Controller
     {
+        private IValidator<ClientModel> _clientValidator;
         private readonly IClientRepository _clientRepository;
 
-        public ClientController(IClientRepository clientRepository)
+        public ClientController(IClientRepository clientRepository, IValidator<ClientModel> clientValidator)
         {
+            _clientValidator = clientValidator;
             _clientRepository = clientRepository;
         }
 
@@ -28,14 +33,21 @@ namespace G4TransilvaniaHotelsApp.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(ClientModel client)
         {
-            if (!ModelState.IsValid)
+            ValidationResult validationResult = _clientValidator.Validate(client);
+
+            try
             {
+                _clientRepository.add(client);
+                return RedirectToAction("Index");
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Error = ex.Message;
+
+                validationResult.AddToModelState(this.ModelState);
+
                 return View(client);
             }
-
-            _clientRepository.add(client);
-
-            return RedirectToAction(nameof(Index));
         }
 
         [HttpGet]
